@@ -1,12 +1,21 @@
 import openai
 import streamlit as st
 from streamlit_chat import message
+from finbot.helpdesk import HelpDesk
+
+@st.cache_resource
+def get_model():
+    model = HelpDesk(new_db=True)
+    return model
+
+model = get_model()
+
 
 # Setting page title and header
 st.set_page_config(page_title="Open Sesame!", page_icon=":robot_face:")
 st.markdown("<h1 style='text-align: center;'>SETU finbot - Open Sesame! </h1>", unsafe_allow_html=True)
 
-client = openai.Client(base_url="http://localhost:11434/v1", api_key="ignore-me")
+# client = openai.Client(base_url="http://localhost:11434/v1", api_key="ignore-me")
 model_name = "llama3"
 # Initialise session state variables
 if 'generated' not in st.session_state:
@@ -51,12 +60,14 @@ if clear_button:
 # generate a response
 def generate_response(prompt):
     st.session_state['messages'].append({"role": "user", "content": prompt})
-    response = client.chat.completions.create(
-        model=model_name,
-        messages=st.session_state['messages']
-    )
+    response, sources = model.retrieval_qa_inference(prompt)
+    # response = client.chat.completions.create(
+    #     model=model_name,
+    #     messages=st.session_state['messages']
+    # )
     response_content = response.choices[0].message.content
     st.session_state['messages'].append({"role": "assistant", "content": response_content})
+    st.session_state['messages'].append({"role": "assistant", "content": sources})
 
     # print(st.session_state['messages'])
     total_tokens = response.usage.total_tokens
