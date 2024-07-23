@@ -8,6 +8,7 @@ from finbot.config import Config
 from langchain.document_loaders import ConfluenceLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import MarkdownHeaderTextSplitter
+from langchain_community.vectorstores import Chroma
 
 config = Config()
 class DataLoader():
@@ -72,14 +73,12 @@ class DataLoader():
 
     def save_to_db(self, splitted_docs, embeddings):
         """Save chunks to Chroma DB"""
-        from langchain.vectorstores import Chroma
         db = Chroma.from_documents(splitted_docs, embeddings, persist_directory=self.persist_directory)
         db.persist()
         return db
 
     def load_from_db(self, embeddings):
         """Loader chunks to Chroma DB"""
-        from langchain.vectorstores import Chroma
         db = Chroma(
             persist_directory=self.persist_directory,
             embedding_function=embeddings
