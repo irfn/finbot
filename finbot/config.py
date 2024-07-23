@@ -6,9 +6,15 @@ env = environ.Env(
 )
 # reading .env file
 environ.Env.read_env()
+environ.Env.read_env()
+#import ipdb; ipdb.set_trace()
 
-CONFLUENCE_SPACE_NAME = env('CONFLUENCE_SPACE_NAME')
-CONFLUENCE_SPACE_KEY = env('CONFLUENCE_SPACE_KEY')
-CONFLUENCE_USERNAME = env('CONFLUENCE_USERNAME')
-CONFLUENCE_API_KEY = env('CONFLUENCE_API_KEY')
-PERSIST_DIRECTORY  = env('PERSIST_DIRECTORY')
+class Config:
+    def __init__(self):
+        self.CONFLUENCE_URL = env('CONFLUENCE_URL')
+        self.CONFLUENCE_SPACE_NAME = env('CONFLUENCE_SPACE_NAME')
+        self.CONFLUENCE_SPACE_KEY = env('CONFLUENCE_SPACE_KEY')
+        self.CONFLUENCE_USERNAME = env('CONFLUENCE_USERNAME')
+        self.CONFLUENCE_API_KEY = env('CONFLUENCE_API_KEY')
+        self.PERSIST_DIRECTORY  = env('PERSIST_DIRECTORY')
+

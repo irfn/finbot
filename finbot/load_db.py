@@ -3,22 +3,22 @@ import logging
 import shutil
 
 sys.path.append('../')
-from finbot.config import (CONFLUENCE_SPACE_NAME, CONFLUENCE_SPACE_KEY,
-                    CONFLUENCE_USERNAME, CONFLUENCE_API_KEY, PERSIST_DIRECTORY)
+from finbot.config import Config
 
 from langchain.document_loaders import ConfluenceLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 
+config = Config()
 class DataLoader():
     """Create, load, save the DB using the confluence Loader"""
     def __init__(
         self,
-        confluence_url=CONFLUENCE_SPACE_NAME,
-        username=CONFLUENCE_USERNAME,
-        api_key=CONFLUENCE_API_KEY,
-        space_key=CONFLUENCE_SPACE_KEY,
-        persist_directory=PERSIST_DIRECTORY
+        confluence_url=config.CONFLUENCE_SPACE_NAME,
+        username=config.CONFLUENCE_USERNAME,
+        api_key=config.CONFLUENCE_API_KEY,
+        space_key=config.CONFLUENCE_SPACE_KEY,
+        persist_directory=config.PERSIST_DIRECTORY
     ):
 
         self.confluence_url = confluence_url

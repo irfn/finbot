@@ -2,6 +2,7 @@ import openai
 import streamlit as st
 from streamlit_chat import message
 from finbot.helpdesk import HelpDesk
+import finbot.config
 
 @st.cache_resource
 def get_model():

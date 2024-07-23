@@ -8,7 +8,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 openai = "^1.35.10"
-ollama = "^0.2.1"
 token-count = "^0.2.1"
 streamlit = "^1.36.0"
 streamlit-chat = "^0.1.1"
@@ -17,6 +16,8 @@ langchain = "^0.2.10"
 chromadb = "^0.5.4"
 atlassian-python-api = "^3.41.14"
 python-environ = "^0.4.54"
+langchain-community = "^0.2.9"
+langchain-ollama = "^0.1.0"
 
 
 [build-system]

@@ -1,7 +1,7 @@
 import sys
 from finbot.load_db import DataLoader
 import collections
-from langchain.llms import OllamaLLM
+from langchain_ollama.llms import OllamaLLM
 
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
