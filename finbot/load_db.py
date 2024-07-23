@@ -14,7 +14,7 @@ class DataLoader():
     """Create, load, save the DB using the confluence Loader"""
     def __init__(
         self,
-        confluence_url=config.CONFLUENCE_SPACE_NAME,
+        confluence_url=config.CONFLUENCE_URL,
         username=config.CONFLUENCE_USERNAME,
         api_key=config.CONFLUENCE_API_KEY,
         space_key=config.CONFLUENCE_SPACE_KEY,

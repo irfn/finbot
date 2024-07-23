@@ -5,7 +5,7 @@ from langchain_ollama.llms import OllamaLLM
 
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import OllamaEmbeddings
 
 
 class HelpDesk():
@@ -46,8 +46,8 @@ class HelpDesk():
         )
         return prompt
 
-    def get_embeddings(self) -> OpenAIEmbeddings:
-        embeddings = OpenAIEmbeddings()
+    def get_embeddings(self) -> OllamaEmbeddings:
+        embeddings = OllamaEmbeddings()
         return embeddings
 
     def get_llm(self):
