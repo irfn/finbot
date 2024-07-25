@@ -13,7 +13,7 @@ model = get_model()
 
 
 # Setting page title and header
-st.set_page_config(page_title="Open Sesame!", page_icon=":robot_face:")
+# st.set_page_config(page_title="Open Sesame!", page_icon=":robot_face:")
 st.markdown("<h1 style='text-align: center;'>SETU finbot - Open Sesame! </h1>", unsafe_allow_html=True)
 
 # client = openai.Client(base_url="http://localhost:11434/v1", api_key="ignore-me")
@@ -66,14 +66,14 @@ def generate_response(prompt):
     #     model=model_name,
     #     messages=st.session_state['messages']
     # )
-    response_content = response.choices[0].message.content
+    response_content = response
     st.session_state['messages'].append({"role": "assistant", "content": response_content})
     st.session_state['messages'].append({"role": "assistant", "content": sources})
 
     # print(st.session_state['messages'])
-    total_tokens = response.usage.total_tokens
-    prompt_tokens = response.usage.prompt_tokens
-    completion_tokens = response.usage.completion_tokens
+    total_tokens = 1000
+    prompt_tokens = 10
+    completion_tokens = 100
     return response_content, total_tokens, prompt_tokens, completion_tokens
 
 

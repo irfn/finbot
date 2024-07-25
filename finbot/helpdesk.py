@@ -5,7 +5,7 @@ from langchain_ollama.llms import OllamaLLM
 
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-from langchain.embeddings import OllamaEmbeddings
+from langchain_community.embeddings import OllamaEmbeddings
 
 
 class HelpDesk():
@@ -47,11 +47,11 @@ class HelpDesk():
         return prompt
 
     def get_embeddings(self) -> OllamaEmbeddings:
-        embeddings = OllamaEmbeddings()
+        embeddings = OllamaEmbeddings(model="llama3:latest")
         return embeddings
 
     def get_llm(self):
-        return OllamaLLM(model="llama3")
+        return OllamaLLM(model="llama3:latest")
 
     def get_retrieval_qa(self):
         chain_type_kwargs = {"prompt": self.prompt}
