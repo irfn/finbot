@@ -3,30 +3,22 @@ import logging
 import shutil
 
 sys.path.append('../')
-from finbot.config import Config
 
 from langchain.document_loaders import ConfluenceLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 from langchain_community.vectorstores import Chroma
 
-config = Config()
+
 class DataLoader():
     """Create, load, save the DB using the confluence Loader"""
-    def __init__(
-        self,
-        confluence_url=config.CONFLUENCE_URL,
-        username=config.CONFLUENCE_USERNAME,
-        api_key=config.CONFLUENCE_API_KEY,
-        space_key=config.CONFLUENCE_SPACE_KEY,
-        persist_directory=config.PERSIST_DIRECTORY
-    ):
+    def __init__( self, config):
 
-        self.confluence_url = confluence_url
-        self.username = username
-        self.api_key = api_key
-        self.space_key = space_key
-        self.persist_directory = persist_directory
+        self.confluence_url = config.CONFLUENCE_URL
+        self.username = config.CONFLUENCE_USERNAME
+        self.api_key = config.CONFLUENCE_API_KEY
+        self.space_key = config.CONFLUENCE_SPACE_KEY
+        self.persist_directory = config.PERSIST_DIRECTORY
 
     def load_from_confluence_loader(self):
         """Load HTML files from Confluence"""

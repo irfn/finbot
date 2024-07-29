@@ -2,11 +2,13 @@ import openai
 import streamlit as st
 from streamlit_chat import message
 from finbot.helpdesk import HelpDesk
-import finbot.config
+from finbot.config import Config
+
+config = Config()
 
 @st.cache_resource
 def get_model():
-    model = HelpDesk(new_db=False)
+    model = HelpDesk(config=config)
     return model
 
 model = get_model()

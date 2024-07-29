@@ -2,6 +2,7 @@ import environ
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
+    INIT_DB=(bool, False),
     PERSIST_DIRECTORY=(str, "./db/chroma")
 )
 # reading .env file
@@ -11,6 +12,7 @@ environ.Env.read_env()
 
 class Config:
     def __init__(self):
+        self.INIT_DB = env('INIT_DB')
         self.CONFLUENCE_URL = env('CONFLUENCE_URL')
         self.CONFLUENCE_SPACE_NAME = env('CONFLUENCE_SPACE_NAME')
         self.CONFLUENCE_SPACE_KEY = env('CONFLUENCE_SPACE_KEY')

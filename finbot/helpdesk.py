@@ -10,18 +10,18 @@ from langchain_community.embeddings import OllamaEmbeddings
 
 class HelpDesk():
     """Create the necessary objects to create a QARetrieval chain"""
-    def __init__(self, new_db=True):
+    def __init__(self, config):
 
-        self.new_db = new_db
+        self.new_db = config.INIT_DB
         self.template = self.get_template()
         self.embeddings = self.get_embeddings()
         self.llm = self.get_llm()
         self.prompt = self.get_prompt()
 
         if self.new_db:
-            self.db = DataLoader().set_db(self.embeddings)
+            self.db = DataLoader(config=config).set_db(self.embeddings)
         else:
-            self.db = DataLoader().get_db(self.embeddings)
+            self.db = DataLoader(config=config).get_db(self.embeddings)
 
         self.retriever = self.db.as_retriever()
         self.retrieval_qa_chain = self.get_retrieval_qa()
@@ -67,7 +67,11 @@ class HelpDesk():
     def retrieval_qa_inference(self, question, verbose=True):
         query = {"query": question}
         answer = self.retrieval_qa_chain(query)
-        sources = self.list_top_k_sources(answer, k=2)
+        sources = []
+        if len(answer["source_documents"]) == 0:
+            sources = ["No answer found"]
+        else:
+            sources = self.list_top_k_sources(answer, k=2)
 
         if verbose:
             print(sources)
