@@ -6,7 +6,7 @@ import finbot.config
 
 @st.cache_resource
 def get_model():
-    model = HelpDesk(new_db=True)
+    model = HelpDesk(new_db=False)
     return model
 
 model = get_model()
